@@ -3,8 +3,6 @@
 using CarDealer.Mapping;
 using CarDealer.Persistence;
 using CarDealer.Services.Implementations;
-using CarDealer.Services.Models.Cars.InputModels;
-using CarDealer.Services.Models.Customer.InputModels;
 
 namespace ConsoleApplication
 {
