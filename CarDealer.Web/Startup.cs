@@ -1,3 +1,8 @@
+using AutoMapper;
+using CarDealer.Mapping;
+using CarDealer.Persistence;
+using CarDealer.Services.Implementations;
+using CarDealer.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,7 +28,20 @@ namespace CarDealer.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CarDealerDbContext>();
+            services.AddTransient<ICarService, CarService>();
+            services.AddTransient<ICustomerService, CustomerService>();
             services.AddControllersWithViews();
+
+            var mapperConfig = new MapperConfiguration(cfg => 
+            {
+                cfg.AddProfile(new CarDealerProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
