@@ -1,0 +1,17 @@
+﻿@model IEnumerable<CarDealer.Services.Models.Cars.OutputModels.ListAllCarsByMakeServiceModel>
+<h1>Search results:</h1>
+<table class="table table-striped table-bordered table-hover table-sm">
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>TravelledDistance</th>
+    </tr>
+    @foreach (var car in this.Model)
+    {
+        <tr>
+            <td>@car.Make</td>
+            <td>@car.Model</td>
+            <td>@car.TravelledDistance km</td>
+        </tr>
+    }    
+</table>

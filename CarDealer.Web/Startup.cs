@@ -6,6 +6,7 @@ using CarDealer.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -47,6 +48,7 @@ namespace CarDealer.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Middlewares
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -54,16 +56,22 @@ namespace CarDealer.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+           
                 app.UseHsts();
             }
+
+            // check https protocol
             app.UseHttpsRedirection();
+
+            // check for static files
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            // check for autorization
             app.UseAuthorization();
 
+            // default endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

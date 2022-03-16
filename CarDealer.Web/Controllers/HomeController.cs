@@ -1,4 +1,5 @@
-﻿using CarDealer.Web.Models;
+﻿using CarDealer.Services.Interfaces;
+using CarDealer.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,16 +12,17 @@ namespace CarDealer.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ICarService _carService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICarService carService)
         {
-            _logger = logger;
+            this._carService = carService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var cars = _carService.GetAll();
+            return View(cars);
         }
 
         public IActionResult Privacy()

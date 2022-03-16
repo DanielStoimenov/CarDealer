@@ -1,8 +1,26 @@
-﻿@{
+﻿@model IEnumerable<CarDealer.Services.Models.Cars.OutputModels.ListAllCarsServiceModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Car Dealer BG</h1>
+</div>
+<table class="table table-striped table-hover table-sm table-bordered">
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>TravelledDistance</th>
+    </tr>
+    @foreach (var car in this.Model.Take(25))
+    {
+        <tr>
+            <td>@car.Make</td>
+            <td>@car.Model</td>
+            <td>@car.TravelledDistance km</td>
+        </tr>
+    }    
+</table>
+<div class="text-center">
+<p>Learn about <a href="https://www.caranddriver.com/features/g27197524/best-sports-cars/">best sport cars of @DateTime.UtcNow.Year</a>.</p>
 </div>
