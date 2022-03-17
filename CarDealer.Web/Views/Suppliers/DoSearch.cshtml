@@ -1,0 +1,17 @@
+﻿@model IEnumerable<CarDealer.Services.Models.Supplier.OutputModels.ListAllSupplierPartsServiceModel>
+<h1>Search results:</h1>
+<table class="table table-striped table-bordered table-hover table-sm">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+    @foreach (var part in this.Model)
+    {
+        <tr>
+            <td>@part.Name</td>
+            <td>@part.Price $</td>
+            <td>@part.Quantity</td>
+        </tr>
+    }    
+</table>

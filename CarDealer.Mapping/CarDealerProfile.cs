@@ -6,6 +6,7 @@ using CarDealer.Services.Models.Cars.OutputModels;
 using CarDealer.Services.Models.Customer.InputModels;
 using CarDealer.Services.Models.Customer.OutputModels;
 using CarDealer.Services.Models.Parts.OutputModels;
+using CarDealer.Services.Models.Supplier.OutputModels;
 
 namespace CarDealer.Mapping
 {
@@ -31,7 +32,12 @@ namespace CarDealer.Mapping
 
             // Parts
             this.CreateMap<Part, ListAllPartsServiceModel>()
-                .ForMember(supp => supp.SupplierName, p => p.MapFrom(p => p.Supplier.Name));
+                .ForMember(s => s.SupplierName, p => p.MapFrom(p => p.Supplier.Name));
+
+            // Supplier
+            this.CreateMap<Part, ListAllSupplierPartsServiceModel>();
+
+            this.CreateMap<Supplier, ListAllSuppliersViewModel>();
         }
     }
 }

@@ -32,6 +32,7 @@ namespace CarDealer.Web
             services.AddDbContext<CarDealerDbContext>();
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<IPartService, PartService>();
+            services.AddTransient<ISupplierService, SupplierService>();
             services.AddTransient<ICustomerService, CustomerService>();
             services.AddControllersWithViews();
 
