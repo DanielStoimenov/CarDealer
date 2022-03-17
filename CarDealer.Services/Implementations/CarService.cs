@@ -10,22 +10,22 @@ namespace CarDealer.Services.Implementations
 {
     public class CarService : ICarService
     {
-        private readonly CarDealerDbContext dbContext;
-        private readonly IMapper mapper;
+        private readonly CarDealerDbContext _dbContext;
+        private readonly IMapper _mapper;
 
         public CarService(CarDealerDbContext dbContext, IMapper mapper)
         {
-            this.dbContext = dbContext;
-            this.mapper = mapper;
+            this._dbContext = dbContext;
+            this._mapper = mapper;
         }
 
         public void AddCar(AddCarInputServiceModel model)
         {
             try
             {
-                Car car = mapper.Map<Car>(model);
-                dbContext.Cars.Add(car);
-                dbContext.SaveChanges();
+                Car car = _mapper.Map<Car>(model);
+                _dbContext.Cars.Add(car);
+                _dbContext.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -36,9 +36,9 @@ namespace CarDealer.Services.Implementations
 
         public ICollection<ListAllCarsServiceModel> GetAll()
         {
-            var cars = dbContext
+            var cars = _dbContext
                 .Cars
-                .ProjectTo<ListAllCarsServiceModel>(mapper.ConfigurationProvider)
+                .ProjectTo<ListAllCarsServiceModel>(_mapper.ConfigurationProvider)
                 .ToList();
 
             return cars;
@@ -46,10 +46,10 @@ namespace CarDealer.Services.Implementations
 
         public ICollection<ListAllCarsByMakeServiceModel> SearchByMake(string make)
         {
-            var cars = dbContext
+            var cars = _dbContext
                 .Cars
                 .Where(c => c.Make.ToLower() == make.ToLower())
-                .ProjectTo<ListAllCarsByMakeServiceModel>(mapper.ConfigurationProvider)
+                .ProjectTo<ListAllCarsByMakeServiceModel>(_mapper.ConfigurationProvider)
                 .ToList();
 
             return cars;
@@ -57,10 +57,10 @@ namespace CarDealer.Services.Implementations
 
         public ICollection<ListAllCarsByModelServiceModel> SearchByModel(string model)
         {
-            var cars = dbContext
+            var cars = _dbContext
                 .Cars
                 .Where(c => c.Model.ToLower() == model.ToLower())
-                .ProjectTo<ListAllCarsByModelServiceModel>(mapper.ConfigurationProvider)
+                .ProjectTo<ListAllCarsByModelServiceModel>(_mapper.ConfigurationProvider)
                 .ToList();
 
             return cars;
@@ -68,7 +68,7 @@ namespace CarDealer.Services.Implementations
 
         public bool RemoveByModel(string model)
         {
-            var cars = dbContext
+            var cars = _dbContext
                 .Cars
                 .Where(c => c.Model.ToLower() == model.ToLower());
 
@@ -77,8 +77,8 @@ namespace CarDealer.Services.Implementations
                 throw new ArgumentException("Car not found");
             }
 
-            dbContext.Cars.RemoveRange(cars);
-            var rowsAffected = dbContext.SaveChanges();
+            _dbContext.Cars.RemoveRange(cars);
+            var rowsAffected = _dbContext.SaveChanges();
 
             bool isRemoved = rowsAffected == 1;
 
@@ -87,7 +87,7 @@ namespace CarDealer.Services.Implementations
 
         public bool RemoveByMake(string make)
         {
-            var cars = dbContext
+            var cars = _dbContext
                 .Cars
                 .Where(c => c.Make.ToLower() == make.ToLower());
 
@@ -96,8 +96,8 @@ namespace CarDealer.Services.Implementations
                 throw new ArgumentException("Car not found");
             }
 
-            dbContext.Cars.RemoveRange(cars);
-            var rowAffected = dbContext.SaveChanges();
+            _dbContext.Cars.RemoveRange(cars);
+            var rowAffected = _dbContext.SaveChanges();
 
             bool isRemoved = rowAffected == 1;
 
