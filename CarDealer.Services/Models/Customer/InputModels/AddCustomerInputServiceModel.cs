@@ -7,7 +7,7 @@ namespace CarDealer.Services.Models.Customer.InputModels
         [Required]
         [MinLength(3)]
         [MaxLength(30)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public DateTime BirthDate { get; set; }
 
