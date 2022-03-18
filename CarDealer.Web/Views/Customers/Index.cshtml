@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CarDealer.Services.Models.Customer.OutputModels.ListAllCustomersServiceModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-left">
+    <h1 class="display-4">Customers:</h1>
+</div>
+
+<form method="get" action="">
+    Name: <input type="text" name="Name" />
+    BirthDate: <input type="date" name="BirthDate" />
+    IsYoungDriver: <input type="text" name="IsYoungDriver" />
+    <input type="submit" />
+</form>
+
+<table class="table table-striped table-hover table-sm table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>BirthDate</th>
+        <th>IsYoungDriver</th>
+    </tr>
+    @foreach (var customer in this.Model.Take(25))
+    {
+        <tr>
+            <td>@customer.Name</td>
+            <td>@customer.BirthDate</td>
+            <td>@customer.IsYoungDriver</td>
+        </tr>
+    }    
+</table>
